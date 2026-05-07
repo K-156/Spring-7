@@ -42,7 +42,7 @@ public class BootstrapData implements CommandLineRunner {
 
         Author andrewSaved = authorRepository.save(andrew);
         Book b1Saved = bookRepository.save(b1);
-        Publisher p1Saved = publisherRepository.save(p1);
+        publisherRepository.save(p1);
 
         /* Need to add the data to the owning side or else nothing gets written to the junction table */
         b1Saved.getAuthors().add(andrewSaved);
