@@ -3,9 +3,9 @@ package com.example.demo.bootstrap;
 import com.example.demo.domain.Author;
 import com.example.demo.domain.Book;
 import com.example.demo.domain.Publisher;
-import com.example.demo.repository.AuthorRepository;
-import com.example.demo.repository.BookRepository;
-import com.example.demo.repository.PublisherRepository;
+import com.example.demo.repositories.AuthorRepository;
+import com.example.demo.repositories.BookRepository;
+import com.example.demo.repositories.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -42,10 +42,13 @@ public class BootstrapData implements CommandLineRunner {
 
         Author andrewSaved = authorRepository.save(andrew);
         Book b1Saved = bookRepository.save(b1);
-        publisherRepository.save(p1);
+        Publisher p1Saved = publisherRepository.save(p1);
 
         /* Need to add the data to the owning side or else nothing gets written to the junction table */
         b1Saved.getAuthors().add(andrewSaved);
+
+        b1Saved.setPublisher(p1Saved);
+
         bookRepository.save(b1Saved);
 
         System.out.println("In Bootstrap");
